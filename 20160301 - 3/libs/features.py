@@ -114,9 +114,9 @@ def feature(text):
     addressTerms = removeDuplicate([term for term in addressTermSet if (preprocessText.find(' ' + term + ' ')>= 0)])
     phoneTerms = removeDuplicate([term for term in phoneTermSet if (preprocessText.find(' ' + term + ' ')>= 0)])
 
-    # nNameTerm = sum([len(term.split()) for term in nameTerms])
-    # nAddressTerm = sum([len(term.split()) for term in addressTerms])
-    # nPhoneTerm = sum([len(term.split()) for term in phoneTerms])
+    nNameTerm = sum([len(term.split()) for term in nameTerms])
+    nAddressTerm = sum([len(term.split()) for term in addressTerms])
+    nPhoneTerm = sum([len(term.split()) for term in phoneTerms])
 
     return [
          sum([1 for c in text if (c in string.ascii_letters)]) / textLen,
@@ -125,10 +125,19 @@ def feature(text):
 
          sum([1 for c in text if (c not in (string.punctuation + string.ascii_letters + string.digits))]) / textLen,
 
-         len(nameTerms) / len(nameTermSet) if (len(nameTermSet) > 0) else 0,
-         len(addressTerms) / len(addressTermSet) if (len(addressTermSet)) else 0,
-         len(phoneTerms) / len(phoneTermSet) if (len(phoneTermSet)) else 0
+         nNameTerm / len(nameTermSet) if (len(nameTermSet) > 0) else 0,
+         nAddressTerm / len(addressTermSet) if (len(addressTermSet)) else 0,
+         nPhoneTerm / len(phoneTermSet) if (len(phoneTermSet)) else 0
         ]
 
 def preprocessing(text):
+    # for i in range(len(unic)):
+    #     text = text.replace(unic[i], asi[i])
+    text = text.replace('\n', '')
+
+    text = text.lower()
+
+    while (text != text.replace('  ', ' ')):
+        text = text.replace('  ', ' ')
+
     return text

@@ -101,10 +101,12 @@ def preprocess4GetTerm(text):
 
     return text
 
-feature_names = ['%asciis', '%digits', '%punctuations', '%others', '%name_keywords', '%address_keywords', '%phone_keywords']
+feature_names = ['len < 10', '10 <= len < 23', '23 <= len < 30', '30 <= len < 45', '45 <= len',
+                 '%asciis', '%digits', '%punctuations', '%others', '%name_keywords', '%address_keywords', '%phone_keywords']
 
 def feature(text):
     textLen = text.__len__()
+    termList = text.split()
 
     preprocessText = preprocess4GetTerm(text)
     preprocessedTermList = preprocessText.split()
@@ -118,17 +120,33 @@ def feature(text):
     # nAddressTerm = sum([len(term.split()) for term in addressTerms])
     # nPhoneTerm = sum([len(term.split()) for term in phoneTerms])
 
+
     return [
-         sum([1 for c in text if (c in string.ascii_letters)]) / textLen,
-         sum([1 for c in text if (c in string.digits)]) / textLen,
-         sum([1 for c in text if (c in string.punctuation)]) / textLen,
+             1 if (textLen < 10) else 0,      # length Text < 10
+             1 if (textLen >= 10) and (textLen < 23) else 0,      # length Text < 23
+             1 if (textLen >= 23) and (textLen < 30) else 0,      # length Text < 30
+             1 if (textLen >= 30) and (textLen < 45) else 0,      # length Text < 45
+             1 if (textLen >= 45) else 0,      # length Text >= 45
 
-         sum([1 for c in text if (c not in (string.punctuation + string.ascii_letters + string.digits))]) / textLen,
+             sum([1 for c in text if (c in string.ascii_letters)]) / textLen,
+             sum([1 for c in text if (c in string.digits)]) / textLen,
+             sum([1 for c in text if (c in string.punctuation)]) / textLen,
 
-         len(nameTerms) / len(nameTermSet) if (len(nameTermSet) > 0) else 0,
-         len(addressTerms) / len(addressTermSet) if (len(addressTermSet)) else 0,
-         len(phoneTerms) / len(phoneTermSet) if (len(phoneTermSet)) else 0
-        ]
+             sum([1 for c in text if (c not in (string.punctuation + string.ascii_letters + string.digits))]) / textLen,
+
+             len(nameTerms) / len(nameTermSet) if (len(nameTermSet) > 0) else 0,
+             len(addressTerms) / len(addressTermSet) if (len(addressTermSet)) else 0,
+             len(phoneTerms) / len(phoneTermSet) if (len(phoneTermSet)) else 0
+            ]
 
 def preprocessing(text):
+    # for i in range(len(unic)):
+    #     text = text.replace(unic[i], asi[i])
+    text = text.replace('\n', '')
+
+    text = text.lower()
+
+    while (text != text.replace('  ', ' ')):
+        text = text.replace('  ', ' ')
+
     return text

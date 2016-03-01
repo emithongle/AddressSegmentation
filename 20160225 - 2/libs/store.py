@@ -157,3 +157,27 @@ def saveTestModel(accs, folder='5. Results/', file='test_model_results.xlsx'):
     workbook = xlsxwriter.Workbook(folder + file)
     writeSheet(workbook.add_worksheet('accuracy'), data)
     workbook.close()
+
+
+def loadTermData(folder='4. Test/', file='termdata'):
+    print('=======================================================')
+    print('=> Loading term data test...')
+    textList = loadJson(folder + file)
+    # textList = textList[1:]
+    print('<= Loading term data test...')
+
+    return textList
+
+def saveTermTestResults(titles, termList, results, folder='5. Results/', file='term_result.xlsx'):
+
+    tacc = sum([1 for (y1, y2) in zip(termList['y'], [result[0] for result in results]) if (y1 == y2)]) / len(termList['y'])
+
+    data = [['Accurracy = ', tacc], titles]
+
+    for (i, X, y, result) in zip(range(len(results)), termList['X'], termList['y'], results):
+        data.append([i, X, y] + result)
+    # =========================
+
+    workbook = xlsxwriter.Workbook(folder + file)
+    writeSheet(workbook.add_worksheet('result'), data)
+    workbook.close()

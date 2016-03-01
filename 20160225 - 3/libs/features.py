@@ -101,6 +101,8 @@ def preprocess4GetTerm(text):
 
     return text
 
+feature_names = ['%asciis', '%digits', '%punctuations', '%others', '%name_keywords', '%address_keywords', '%phone_keywords']
+
 def feature(text):
     textLen = text.__len__()
 

@@ -75,6 +75,7 @@ def randomSample(tupleData=None, testSize=0.2):
     return (X_train, y_train, X_test, y_test)
 
 
+feature_names = ['Length/2']
 
 def feature(text):
     return [len(text)/2]

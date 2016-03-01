@@ -30,5 +30,6 @@ store.saveClassifier(clf_model)
 
 # 4. Test
 import test
+import test_term_classifier_model
 
 None

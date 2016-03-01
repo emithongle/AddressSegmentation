@@ -11,5 +11,5 @@ def buildClassifer(name='Neuron Network'):
         learning_rule='adagrad',
         learning_rate=0.01,
         n_iter=1000
-        # n_iter=10
+        # n_iter=1
     )
