@@ -19,5 +19,3 @@ def exc():
     store.saveClassifier(clf_model)
 
     return tacc
-
-acc = exc()

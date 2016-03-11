@@ -16,8 +16,17 @@ def loadJson(file):
     except:
         return None
 
-t = datetime.datetime.now()
-time_start = str(t.date().strftime('%Y%m%d')) + '_' + str(t.time().strftime('%H%M%S'))
+class TimeManage():
+    def __init__(self):
+        self.time = ''
+
+    def setTime(self, _time):
+        self.time = _time
+
+    def getTime(self):
+        return self.time
+
+timeManage = TimeManage()
 
 # ================================
 
@@ -50,6 +59,8 @@ file_log = 'logs.xlsx' # csv
 
 # ==============================================
 
+# number of executive run.py
+nrun = 10
 
 tmp = loadJson(folder_dictionary + '/' + files_dictionary)
 nameTermSet = tmp['name-term-set']

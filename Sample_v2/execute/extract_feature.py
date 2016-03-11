@@ -9,5 +9,3 @@ def exc():
     # 3. Extract features
     featureTuples = extractFeature(preprocessedData)
     store.saveFeatureCSV(featureTuples, feature_names)
-
-exc()

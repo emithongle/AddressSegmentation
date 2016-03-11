@@ -8,47 +8,55 @@ import xlsxwriter
 from libs.models import modelDetails
 from config import *
 from libs.store import writeSheet
+import datetime
+
+# execution
+from execute import preprocessing, extract_feature, random_data, train, test_term_classifier_model as tt, test_address_segment as tas
+
+# ==================
 
 tmpsheet = xlrd.open_workbook('running_logs/logs.xlsx').sheet_by_index(0)
 logs = []
 for i in range(tmpsheet.nrows):
     logs.append(tmpsheet.row_values(i))
 
-millis_S = int(round(time.time() * 1000))
+for i in range(nrun):
 
+    t = datetime.datetime.now()
+    timeManage.setTime(str(t.date().strftime('%Y%m%d')) + '_' + str(t.time().strftime('%H%M%S')))
 
-# 1. Preprocessing
-from execute import preprocessing
+    millis_S = int(round(time.time() * 1000))
 
-# 2. Extract Features
-from execute import extract_feature
+    # 1. Preprocessing
+    preprocessing.exc()
 
-# 3. Random Data
-from execute import random_data
+    # 2. Extract Features
+    extract_feature.exc()
 
-# 4. Train Data
-from execute import train
+    # 3. Random Data
+    random_data.exc()
 
-# 5. Test
-# 5.1. Test Term Classification
-from execute import test_term_classifier_model as tt, train
-# 5.2. Test Address Segmentation
-from execute import test_address_segment
+    # 4. Train Data
+    tacc = train.exc()
 
-millis_E = int(round(time.time() * 1000))
-# _time.append((millis_E - millis_S)/1000)
+    # 5. Test
+    # 5.1. Test Term Classification
+    ttacc = tt.exc()
+    # 5.2. Test Address Segmentation
+    tas.exc()
 
+    millis_E = int(round(time.time() * 1000))
 
-logs.append([time_start,
-             (millis_E - millis_S)/1000,
-             ', '.join([key for key in preprocessing_name if preprocessing_name[key]])
-                if bpreprocessing else '',
-             str(len(feature_names)) + ' features: ' + ', '.join(feature_names),
-             model_type,
-             modelDetails(),
-             train.acc,
-             tt.acc]
-        )
+    logs.append([timeManage.getTime(),
+                 (millis_E - millis_S)/1000,
+                 ', '.join([key for key in preprocessing_name if preprocessing_name[key]])
+                    if bpreprocessing else '',
+                 str(len(feature_names)) + ' features: ' + ', '.join(feature_names),
+                 model_type,
+                 modelDetails(),
+                 tacc,
+                 ttacc]
+            )
 
 workbook = xlsxwriter.Workbook(folder_running_logs + '/' + file_log)
 writeSheet(workbook.add_worksheet('logs'), logs)

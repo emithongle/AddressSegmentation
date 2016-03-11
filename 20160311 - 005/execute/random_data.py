@@ -9,5 +9,3 @@ def exc():
     x = randomSample()
     # store.saveTrainingTestingData(x)
     store.saveTrainingTestingDataCSV(x, feature_names)
-
-exc()

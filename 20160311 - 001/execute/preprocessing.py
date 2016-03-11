@@ -13,5 +13,3 @@ def exc():
     if (bpreprocessing):
         preprocessedData = dataPreprocess(tupleData)
     store.savePreprocessedDataCSV(preprocessedData, feature_names)
-
-exc()

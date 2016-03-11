@@ -161,21 +161,6 @@ def findMaxString(text, skip=0):
 
 def feature(text):
     textLen = text.__len__()
-    # termList = text.split()
-    #
-    # preprocessText = preprocess4GetTerm(text)
-    # preprocessedTermList = preprocessText.split()
-    # preprocessedTermListLen = len(preprocessedTermList)
-    #
-    # nameTerms = removeDuplicate([term for term in nameTermSet if (preprocessText.find(' ' + term + ' ')>= 0)])
-    # addressTerms = removeDuplicate([term for term in addressTermSet if (preprocessText.find(' ' + term + ' ')>= 0)])
-    # phoneTerms = removeDuplicate([term for term in phoneTermSet if (preprocessText.find(' ' + term + ' ')>= 0)])
-    #
-    # # nNameTerm = sum([len(term.split()) for term in nameTerms])
-    # # nAddressTerm = sum([len(term.split()) for term in addressTerms])
-    # # nPhoneTerm = sum([len(term.split()) for term in phoneTerms])
-
-    # '%digits', '%max_digit_skip_0', '%ascii', 'length', 'first_character_ascii', 'first_character_digit'
 
     tc_0, td_0 = findMaxString(text, 0)
 
@@ -183,7 +168,7 @@ def feature(text):
                 # First Character Type
                  1 if checkCharacterType(text[0])[True] == 'ascii' else 0,
                  1 if checkCharacterType(text[0])[True] == 'digit' else 0
-           ] if len(text) >= 1 else [0, 0]
+            ] if len(text) >= 1 else [0, 0]
 
 def dataPreprocess(tupleData):
 

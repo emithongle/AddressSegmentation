@@ -245,7 +245,7 @@ def loadClassifier(folder=folder_model):
     print('=======================================================')
     print('=> Loading model...')
 
-    with open(folder + '/' + time_start + '.pkl', 'rb') as f:
+    with open(folder + '/' + timeManage.getTime() + '.pkl', 'rb') as f:
         try:
             print('=> Loading model...')
             model = pickle.load(f, encoding='latin1')
@@ -259,7 +259,7 @@ def saveClassifier(clf, folder=folder_model):
     print('=======================================================')
     print('=> Saving model...')
 
-    with open(folder + '/' + time_start + '.pkl', 'wb') as f:
+    with open(folder + '/' + timeManage.getTime() + '.pkl', 'wb') as f:
         pickle.dump(clf, f)
     print('<= Saved model.')
 
