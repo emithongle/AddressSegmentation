@@ -90,7 +90,7 @@ model_config = {
     'layers': [(100, 'Sigmoid'), (3, 'Softmax')],
     'learning_rate': 0.01,
     'learning_rule': 'adagrad',
-    'n_iter': 1
+    'n_iter': 1000
 }
 
 # Testing Model

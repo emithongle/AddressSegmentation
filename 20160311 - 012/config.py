@@ -82,7 +82,7 @@ preprocessing_name = {'convert unicode to ascii': True, 'convert to lower': True
                       'remove break line': True, 'remove space by space': True}
 
 # Features
-feature_names = ['%max_digit_skip_0', 'first_character_ascii', 'first_character_digit']
+feature_names = ['%ascii', 'length']
 
 # Model
 model_type = 'Neuron Network'
