@@ -44,6 +44,7 @@ files_features = ['name_features', 'address_features', 'phone_features'] # csv
 files_traintest = ['training_data', 'testing_data']
 
 folder_model = '4. Model'
+file_model = None
 
 folder_test = '5. Test'
 file_full_address_test = 'testdata.txt'
@@ -60,7 +61,7 @@ file_log = 'logs.xlsx' # csv
 # ==============================================
 
 # number of executive run.py
-nrun = 10
+nrun = 1
 
 tmp = loadJson(folder_dictionary + '/' + files_dictionary)
 nameTermSet = tmp['name-term-set']
@@ -89,7 +90,7 @@ model_config = {
     'layers': [(100, 'Sigmoid'), (3, 'Softmax')],
     'learning_rate': 0.01,
     'learning_rule': 'adagrad',
-    'n_iter': 1000
+    'n_iter': 1
 }
 
 # Testing Model

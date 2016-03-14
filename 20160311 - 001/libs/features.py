@@ -165,16 +165,8 @@ def feature(text):
     tc_0, td_0 = findMaxString(text, 0)
 
     return [
-             sum([1 for c in text if (c in string.digits)]) / textLen,
-             len(td_0) / textLen,
-             sum([1 for c in text if (c in string.ascii_letters)]) / textLen,
-             len(text)
-            ] + \
-            ([
-                # First Character Type
-                 1 if checkCharacterType(text[0])[True] == 'ascii' else 0,
-                 1 if checkCharacterType(text[0])[True] == 'digit' else 0
-            ] if len(text) >= 1 else [0, 0])
+             sum([1 for c in text if (c in string.digits)]) / textLen
+            ]
 
 def dataPreprocess(tupleData):
 

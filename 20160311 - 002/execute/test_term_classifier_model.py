@@ -15,7 +15,10 @@ def exc():
     print('=======================================================')
     print('=> Term Classifying...')
 
-    clf = store.loadClassifier()
+    if (file_model):
+        clf = store.loadClassifier(file=file_model)
+    else:
+        clf = store.loadClassifier()
     results = []
 
     for i in range(len(termList['X'])):
@@ -29,6 +32,9 @@ def exc():
 
     tacc = sum([1 for (y1, y2) in zip(termList['y'], [result[0] for result in results]) if (y1 == y2)]) / len(termList['y'])
 
-    store.saveTermTestResults(tacc, titles, termList, results, file=timeManage.getTime() + '_' + file_term_classify_result)
+    if (file_model):
+        store.saveTermTestResults(tacc, titles, termList, results, file=file_model + '_' + file_term_classify_result)
+    else:
+        store.saveTermTestResults(tacc, titles, termList, results, file=timeManage.getTime() + '_' + file_term_classify_result)
 
     return tacc

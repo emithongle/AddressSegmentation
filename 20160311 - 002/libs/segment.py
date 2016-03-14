@@ -10,8 +10,11 @@ import libs.features as fe
 
 nterm = 3
 
-def parseAddress(textList):
-    clf_model = store.loadClassifier()
+def parseAddress(textList, file_model=None):
+    if (file_model):
+        clf_model = store.loadClassifier(file=file_model)
+    else:
+        clf_model = store.loadClassifier()
     _time = []
     templateList = []
 

@@ -225,27 +225,41 @@ def saveTrainingTestingDataCSV(tupleData, feature_names, folder=folder_features,
 #
 #     return {'X_train': X_train, 'y_train': y_train, 'X_test': X_test, 'y_test': y_test}
 
+def arrStringToArrFloat(arr):
+    rarr = []
+    for i in range(len(arr)):
+        tmp = []
+        for j in range(len(arr[i])):
+            tmp.append(float(arr[i][j]))
+        rarr.append(tmp)
+    return rarr
+
 def loadTrainingTestingDataCSV(folder=folder_features, files=files_traintest):
     print('=======================================================')
     print('=> Loading data for training and testing...')
 
     data = loadCSV(folder + '/' + files[0])
-    X_train = np.asarray([data[i][2:] for i in range(1, len(data))])
-    y_train = np.asarray([data[i][0] for i in range(1, len(data))])
+    X_train = np.asarray(arrStringToArrFloat([data[i][2:] for i in range(1, len(data))]))
+    y_train = np.asarray([int(data[i][0]) for i in range(1, len(data))])
 
     data = loadCSV(folder + '/' + files[1])
-    X_test = np.asarray([data[i][2:] for i in range(1, len(data))])
-    y_test = np.asarray([data[i][0] for i in range(1, len(data))])
+    X_test = np.asarray(arrStringToArrFloat([data[i][2:] for i in range(1, len(data))]))
+    y_test = np.asarray([int(data[i][0]) for i in range(1, len(data))])
 
     print('<= Loaded data.')
 
     return {'X_train': X_train, 'y_train': y_train, 'X_test': X_test, 'y_test': y_test}
 
-def loadClassifier(folder=folder_model):
+def loadClassifier(folder=folder_model, file=None):
     print('=======================================================')
     print('=> Loading model...')
 
-    with open(folder + '/' + timeManage.getTime() + '.pkl', 'rb') as f:
+    if (file):
+        file = file
+    else:
+        file = timeManage.getTime()
+
+    with open(folder + '/' + file + '.pkl', 'rb') as f:
         try:
             print('=> Loading model...')
             model = pickle.load(f, encoding='latin1')
@@ -255,11 +269,15 @@ def loadClassifier(folder=folder_model):
     print('<= Loaded model.')
     return model
 
-def saveClassifier(clf, folder=folder_model):
+def saveClassifier(clf, folder=folder_model, file=None):
     print('=======================================================')
     print('=> Saving model...')
+    if (file):
+        file = file
+    else:
+        file = timeManage.getTime()
 
-    with open(folder + '/' + timeManage.getTime() + '.pkl', 'wb') as f:
+    with open(folder + '/' + file + '.pkl', 'wb') as f:
         pickle.dump(clf, f)
     print('<= Saved model.')
 
