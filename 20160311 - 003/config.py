@@ -77,7 +77,7 @@ preprocessing_func = 'preprocessing'
 
 
 # Preprocessing
-bpreprocessing = False
+bpreprocessing = True
 preprocessing_name = {'convert unicode to ascii': True, 'convert to lower': True,
                       'remove break line': True, 'remove space by space': True}
 

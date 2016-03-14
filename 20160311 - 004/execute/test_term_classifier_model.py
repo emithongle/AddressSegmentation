@@ -10,7 +10,7 @@ from libs import store
 def exc():
     # 5. Test
     tmp = store.loadTermData()
-    termList = {'X': [i[0] for i in tmp], 'y': [i[1] for i in tmp]}
+    termList = {'X': [i[0] for i in tmp], 'y': [int(i[1]) for i in tmp]}
 
     print('=======================================================')
     print('=> Term Classifying...')
