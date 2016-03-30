@@ -30,7 +30,7 @@ timeManage = TimeManage()
 
 # ================================
 
-folder_dictionary = '0. Dictionary'
+folder_datasource = '0. Data-source'
 files_dictionary = 'dictionary' # json
 
 folder_data = '1. Data'
@@ -44,7 +44,7 @@ files_features = ['name_features', 'address_features', 'phone_features'] # csv
 files_traintest = ['training_data', 'testing_data']
 
 folder_model = '4. Model'
-file_model = None
+file_model = None # '20160329_150346'
 
 folder_test = '5. Test'
 file_full_address_test = 'testdata.txt'
@@ -61,9 +61,9 @@ file_log = 'logs.xlsx' # csv
 # ==============================================
 
 # number of executive run.py
-nrun = 1
+nrun = 10
 
-tmp = loadJson(folder_dictionary + '/' + files_dictionary)
+tmp = loadJson(folder_datasource + '/' + files_dictionary)
 nameTermSet = tmp['name-term-set']
 addressTermSet = tmp['address-term-set']
 phoneTermSet = tmp['phone-term-set']
@@ -84,20 +84,20 @@ preprocessing_name = {'convert unicode to ascii': True, 'convert to lower': True
 
 # Features
 feature_list = [
-    ('length', False),
-    ('#ascii', False),
-    ('#digit', False),
-    ('#punctuation', False),
+    # ('length', True),
+    # ('#ascii', True),
+    # ('#digit', True),
+    # ('#punctuation', True),
 
     ('#ascii/(#ascii+#digit+#punctuation)', True),
     ('#digit/(#ascii+#digit+#punctuation)', True),
 
-    ('%ascii', False),
-    ('%digits', False),
+    # ('%ascii', True),
+    # ('%digits', True),
 
-    ('%kwName', False),
-    ('%kwAddress', False),
-    ('%kwPhone', False),
+    ('%kwName', True),
+    ('%kwAddress', True),
+    ('%kwPhone', True),
 
     ('%max_digit_skip_0', True),
     ('#max_digit_skip_0', True),
@@ -119,7 +119,7 @@ model_config = {
     'layers': [(100, 'Sigmoid'), (3, 'Softmax')],
     'learning_rate': 0.01,
     'learning_rule': 'adagrad',
-    'n_iter': 30
+    'n_iter': 1000
 }
 model_config_file = 'model_config'
 
