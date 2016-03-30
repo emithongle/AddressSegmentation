@@ -61,7 +61,7 @@ file_log = 'logs.xlsx' # csv
 # ==============================================
 
 # number of executive run.py
-nrun = 5
+nrun = 10
 
 tmp = loadJson(folder_datasource + '/' + files_dictionary)
 nameTermSet = tmp['name-term-set']
@@ -99,16 +99,16 @@ feature_list = [
     ('%kwAddress', True),
     ('%kwPhone', True),
 
-    ('%max_digit_skip_0', False),
+    ('%max_digit_skip_0', True),
     ('#max_digit_skip_0', False),
     ('%max_digit_skip_0_1', False),
-    ('#max_digit_skip_0_1', True),
+    ('#max_digit_skip_0_1', False),
 
     ('first_character_ascii', True),
     ('first_character_digit', True),
 
-    ('b+', True),
-    ('b/\\', True)
+    ('b+', False),
+    ('b/\\', False)
 ]
 
 # Model

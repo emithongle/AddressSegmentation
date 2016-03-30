@@ -300,12 +300,11 @@ def preprocess(text):
             text = text.replace('  ', ' ')
 
     if (preprocessing_name['punctuation_begin']):
-        while (len(text) > 0 and text[0] in rm_preprocessed_punctuation + ' '):
+        while (len(text) > 0 and text[0] in split_punctuation + rm_preprocessed_punctuation):
             text = text[1:]
 
     if (preprocessing_name['punctuation_end']):
-        # if (len(text) > 0):
-        while (len(text) > 0 and text[-1] in rm_preprocessed_punctuation + ' '):
+        while (len(text) > 0 and text[-1] in split_punctuation + rm_preprocessed_punctuation):
             text = text[:-1]
 
     text = text.strip()

@@ -61,7 +61,7 @@ file_log = 'logs.xlsx' # csv
 # ==============================================
 
 # number of executive run.py
-nrun = 5
+nrun = 10
 
 tmp = loadJson(folder_datasource + '/' + files_dictionary)
 nameTermSet = tmp['name-term-set']
